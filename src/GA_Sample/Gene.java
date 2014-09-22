@@ -15,7 +15,7 @@ public class Gene implements Comparator<Gene>, Comparable<Gene> {
      * this is not necessary: the only constraint is that a better solution
      * must have a strictly higher fitness than a worse solution
      */
-    protected float mFitness;
+    private float mFitness;
     /**
      * The chromosome contains only integers 0 or 1 (we choose to avoid
      * using a boolean type to make computations easier)

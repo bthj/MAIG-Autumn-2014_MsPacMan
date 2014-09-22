@@ -9,6 +9,22 @@ public class PacManBlackboard extends Blackboard {
 
 	public Game game;
 	
+	public PacManBlackboard() {
+		MIN_GHOST_DISTANCE = 10;
+		MAX_POWER_PILL_DISTANCE = 18;
+		POWER_PILL_WALK_AWAY_DISTANCE = 12;
+	}
+	
+	public PacManBlackboard( 
+			int minGhostDistance, 
+			int maxPowerPillDistance, 
+			int powerPillWalkAwayDistance ) {
+		
+		MIN_GHOST_DISTANCE = minGhostDistance;
+		MAX_POWER_PILL_DISTANCE = maxPowerPillDistance;
+		POWER_PILL_WALK_AWAY_DISTANCE = powerPillWalkAwayDistance;
+	}
+	
 	/*
 	 * Thresholds affecting pacman behaviour.
 	 * Those will form the gene in a Genetic Algorithm
