@@ -10,7 +10,7 @@ public class IsGhostTooClose extends LeafTask {
 
 	private PacManBlackboard pacManBB;
 
-	private static final int MIN_DISTANCE=20;	//if a ghost is this close, run away
+//	private static final int MIN_DISTANCE=20;	//if a ghost is this close, run away
 	
 	
 	public IsGhostTooClose(Blackboard blackboard, String name) {
@@ -45,10 +45,12 @@ public class IsGhostTooClose extends LeafTask {
 		for( GHOST ghost : GHOST.values() ) {
 			
 			if( game.getGhostEdibleTime(ghost) == 0 && game.getGhostLairTime(ghost) == 0 ) {
-				if( game.getShortestPathDistance(currentNode, game.getGhostCurrentNodeIndex(ghost)) < MIN_DISTANCE ) {
+				if( game.getShortestPathDistance(
+						currentNode, 
+						game.getGhostCurrentNodeIndex(ghost)) < pacManBB.MIN_GHOST_DISTANCE ) {
 					
 					pacManBB.imminentDanger = ghost;
-					System.out.println( "GHOST TOO CLOSE !!!1!!1!1!" );
+//					System.out.println( "GHOST TOO CLOSE !!!1!!1!1!" );
 					break;
 				}
 			}

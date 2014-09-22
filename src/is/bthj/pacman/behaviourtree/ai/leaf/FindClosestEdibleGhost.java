@@ -55,13 +55,13 @@ public class FindClosestEdibleGhost extends LeafTask {
 		}
 		if( null != minGhost ) {
 			
-			System.out.println( "FOUND EDIBLE GHOST TO GO AFTER" );
+//			System.out.println( "FOUND EDIBLE GHOST TO GO AFTER" );
 			
 			pacManBB.edibleGhost = minGhost;
 			control.finishWithSuccess();
 		} else {
 			
-			System.out.println( "FOUND no edible ghost TO GO AFTER" );
+//			System.out.println( "FOUND no edible ghost TO GO AFTER" );
 			
 			control.finishWithFailure();
 		}

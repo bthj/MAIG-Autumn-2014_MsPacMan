@@ -54,6 +54,9 @@ public class Executor
 		exec.runExperiment(new RandomPacMan(),new RandomGhosts(),numTrials);
 		 */
 		
+		exec.runExperiment(new BehaviourTreePacManController(),new StarterGhosts(),10);
+		
+		
 		/*
 		//run a game in synchronous mode: game waits until controllers respond.
 		int delay=5;
@@ -71,7 +74,7 @@ public class Executor
 //		exec.runGameTimed(new BehaviourTreePacManController(), new StarterGhosts(), visual);
 		
 		// Neural Network data collection
-		exec.runGameTimed(new DataCollectorController(new KeyBoardInput()),new StarterGhosts(),visual);
+//		exec.runGameTimed(new DataCollectorController(new KeyBoardInput()),new StarterGhosts(),visual);
 
 		
 //		exec.runGameTimed(new HumanController(new KeyBoardInput()),new StarterGhosts(),visual);	

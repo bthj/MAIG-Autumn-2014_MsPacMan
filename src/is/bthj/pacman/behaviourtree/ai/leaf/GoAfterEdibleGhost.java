@@ -41,7 +41,7 @@ public class GoAfterEdibleGhost extends LeafTask {
 				game.getGhostCurrentNodeIndex(pacManBB.edibleGhost), 
 				DM.PATH );
 		
-		System.out.println( "WILL GO AFTER EDIBLE GHOST BY MOVE: " + pacManBB.move );
+//		System.out.println( "WILL GO AFTER EDIBLE GHOST BY MOVE: " + pacManBB.move );
 		
 		control.finishWithSuccess();
 	}

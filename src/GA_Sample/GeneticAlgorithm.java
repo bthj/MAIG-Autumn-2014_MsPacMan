@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.Random;        // for generating random numbers
 import java.util.ArrayList;     // arrayLists are more versatile than arrays
 
-import com.sun.glass.ui.View.Capability;
-
 
 /**
  * Genetic Algorithm sample class <br/>

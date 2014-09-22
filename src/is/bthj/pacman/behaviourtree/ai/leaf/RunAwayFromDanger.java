@@ -42,7 +42,7 @@ public class RunAwayFromDanger extends LeafTask {
 				game.getGhostCurrentNodeIndex(pacManBB.imminentDanger), 
 				DM.PATH );
 		
-		System.out.println( "avoidance MOVE: " + pacManBB.move );
+//		System.out.println( "avoidance MOVE: " + pacManBB.move );
 		
 		control.finishWithSuccess();
 	}
