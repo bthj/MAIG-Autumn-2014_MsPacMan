@@ -36,7 +36,7 @@ public class PacManGeneForBehaviourTree implements Comparable<PacManGeneForBehav
 	/**
 	 * Initializes this gene with zero fitness.
 	 */
-	PacManGeneForBehaviourTree() {
+	public PacManGeneForBehaviourTree() {
 		
 		fitness = 0;
 	}

@@ -47,15 +47,32 @@ public class GoAfterClosesAvailablePill extends LeafTask {
 		int closestPowerPillIndex = game.getClosestNodeIndexFromNodeIndex(
 				currentNode, pacManBB.availablePowerPillIndices, DM.PATH);
 		
-		if( game.getShortestPathDistance(
-				currentNode, closestPowerPillIndex) < pacManBB.MAX_POWER_PILL_DISTANCE ) {
+		if( closestPowerPillIndex > -1 && 
+				game.getShortestPathDistance(
+						currentNode, closestPowerPillIndex) < pacManBB.MAX_POWER_PILL_DISTANCE ) {
 			
-			pacManBB.move = game.getNextMoveAwayFromTarget(
-					currentNode, 
-					closestPowerPillIndex, 
-					DM.PATH);
+//			try {
+//				/*
+//				 * For a yet unknown reason, the following call sometimes throws a
+//				 * IndexOutOfBounds exception: -1 
+//				 * so we'll for now catch that error, print out some debug information
+//				 * and allow PacMan to carry on with the previous movement.
+//				 */
+				pacManBB.move = game.getNextMoveAwayFromTarget(
+						currentNode, 
+						closestPowerPillIndex, 
+						DM.PATH);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				System.out.println( "currentNode: " + currentNode );
+//				System.out.println( "closestPowerPillIndex: " + closestPowerPillIndex );
+//				
+//				pacManBB.move = MOVE.NEUTRAL;
+//			}
 			
-		} else if( game.getShortestPathDistance(currentNode, closestPowerPillIndex) < 
+		} else if( closestPowerPillIndex > -1 && 
+				game.getShortestPathDistance(currentNode, closestPowerPillIndex) < 
 					pacManBB.MAX_POWER_PILL_DISTANCE + pacManBB.POWER_PILL_WALK_AWAY_DISTANCE ) {
 			
 			pacManBB.move = MOVE.NEUTRAL;

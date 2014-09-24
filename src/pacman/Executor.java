@@ -1,6 +1,8 @@
 package pacman;
 
 import is.bthj.pacman.behaviourtree.BehaviourTreePacManController;
+import is.bthj.pacman.ga.GeneticAlgorithmPacManController;
+import is.bthj.pacman.ga.PacManGeneForBehaviourTree;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -54,7 +56,7 @@ public class Executor
 		exec.runExperiment(new RandomPacMan(),new RandomGhosts(),numTrials);
 		 */
 		
-		exec.runExperiment(new BehaviourTreePacManController(),new StarterGhosts(),10);
+//		exec.runExperiment(new BehaviourTreePacManController(),new StarterGhosts(),10);
 		
 		
 		/*
@@ -72,6 +74,20 @@ public class Executor
 		
 		// behaviour tree:
 //		exec.runGameTimed(new BehaviourTreePacManController(), new StarterGhosts(), visual);
+		PacManGeneForBehaviourTree gene = new PacManGeneForBehaviourTree();
+		gene.setMinGhostDistance(14);
+		gene.setMaxPowerPillDistance(1);
+		gene.setPowerPillWalkAwayDistance(67);
+//		exec.runGameTimed(
+//				new GeneticAlgorithmPacManController(gene), 
+//				new StarterGhosts(), 
+//				visual );
+		float fitness = (float) exec.runExperimentReturnAverageScore(
+				new GeneticAlgorithmPacManController(gene), 
+				new StarterGhosts(), 
+				500 );
+		System.out.println( "Fitness: " + fitness );
+		
 		
 		// Neural Network data collection
 //		exec.runGameTimed(new DataCollectorController(new KeyBoardInput()),new StarterGhosts(),visual);
@@ -109,6 +125,23 @@ public class Executor
      */
     public void runExperiment(Controller<MOVE> pacManController,Controller<EnumMap<GHOST,MOVE>> ghostController,int trials)
     {
+    	double avgScore = runExperimentReturnAverageScore(pacManController, ghostController, trials);
+    	System.out.println( avgScore );
+    }
+    
+    /**
+     * 
+     * @param pacManController The Pac-Man controller
+     * @param ghostController The Ghosts controller
+     * @param trials The number of trials to be executed
+     * @return The average score from the game runs.
+     */
+    public double runExperimentReturnAverageScore(
+    		Controller<MOVE> pacManController,
+    		Controller<EnumMap<GHOST,MOVE>> 
+    		ghostController,
+    		int trials) {
+    	
     	double avgScore=0;
     	
     	Random rnd=new Random(0);
@@ -125,11 +158,12 @@ public class Executor
 			}
 			
 			avgScore+=game.getScore();
-			System.out.println(i+"\t"+game.getScore());
+//			System.out.println(i+"\t"+game.getScore());
 		}
 		
-		System.out.println(avgScore/trials);
+		return avgScore/trials;
     }
+    
 	
 	/**
 	 * Run a game in asynchronous mode: the game waits until a move is returned. In order to slow thing down in case

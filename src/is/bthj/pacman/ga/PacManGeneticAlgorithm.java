@@ -6,17 +6,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import pacman.Executor;
+import pacman.controllers.examples.StarterGhosts;
+
 public class PacManGeneticAlgorithm {
 
 	// constants
 	
 	static int POPULATION_SIZE = 500;
-	static int MIN_MAX_FITNESS_DELTA_GOAL = 1000; // worst and best fitness should be this close
+	static int MIN_MAX_FITNESS_DELTA_GOAL = 100; // worst and best fitness should be this close
 	
 	
 	// variables
 	
 	ArrayList<PacManGeneForBehaviourTree> population;
+	
+	Executor exec;
 	
 	
 	// functions
@@ -35,6 +40,8 @@ public class PacManGeneticAlgorithm {
 			entry.randomizeChromosome();
 			population.add( entry );
 		}
+		
+		 exec = new Executor();
 	}
 	
 	/**
@@ -53,12 +60,18 @@ public class PacManGeneticAlgorithm {
 	}
 	
 	private float fitnessFunction( PacManGeneForBehaviourTree gene ) {
-		float fitness = -1;
 		
-		PacManBlackboard pacManBB = gene.getPhenotype();
-
-		// TODO: evaluate fitness by instantiating a pacman controller 
-		// 			and performing several test runs on it, with Executor.runExperiment(...
+		// we'll obtain this gene's fitness by running PacMan experiments
+		// x times, using a BehaviourTree with threshold values set to those
+		// from the gene to be tested for fitness.
+		float fitness = (float) exec.runExperimentReturnAverageScore(
+				new GeneticAlgorithmPacManController(gene), 
+				new StarterGhosts(), 
+				1 ); // <- we run the experiment 1 times
+		
+//		if( 0 == fitness ) {
+//			System.out.println( "zero fitness: " + gene.toString() );
+//		}
 		
 		return fitness;
 	}
@@ -81,8 +94,8 @@ public class PacManGeneticAlgorithm {
 		child2.mutate();
 		
 		// let's remove the two worst genes
-		population.remove( population.size() - 1 );
-		population.remove( population.size() - 1 );
+		population.remove( 0 );
+		population.remove( 0 );
 		// and add the children
 		population.add( child1 );
 		population.add( child2 );
@@ -114,8 +127,8 @@ public class PacManGeneticAlgorithm {
 		}
 		// let's sort the random 5 parents according to fitness and choose the best two
 		Collections.sort( randomGenes );
-		result[0] = randomGenes.get( 0 );
-		result[1] = randomGenes.get( 1 );
+		result[0] = randomGenes.get( randomGenes.size() - 2 );
+		result[1] = randomGenes.get( randomGenes.size() - 1 );
 		
 		return result;
 	}
@@ -190,7 +203,14 @@ public class PacManGeneticAlgorithm {
             		+ "\t MaxFitness: " + maxFitness;
             System.out.println( output );
             
+        	System.out.println( "\tWorst performing gene so far: " + population.getGene(0).toString() );
+        	System.out.println( "\tBest performing gene so far: " + population.getGene(population.size()-1).toString() );
+            
             if( (maxFitness - minFitness) <= MIN_MAX_FITNESS_DELTA_GOAL ) {
+            	
+            	// we have reached our goal, let's print the best gene
+            	System.out.println( "Best performing gene:" );
+            	System.out.println( population.getGene(0).toString() );
             	
             	break;
             }
