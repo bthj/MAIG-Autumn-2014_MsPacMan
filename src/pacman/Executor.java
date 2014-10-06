@@ -1,9 +1,5 @@
 package pacman;
 
-import is.bthj.pacman.behaviourtree.BehaviourTreePacManController;
-import is.bthj.pacman.ga.GeneticAlgorithmPacManController;
-import is.bthj.pacman.ga.PacManGeneForBehaviourTree;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -14,7 +10,10 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Random;
 
-import dataRecording.DataCollectorController;
+import bjrr.pacman.ann.dataRecording.DataCollectorController;
+import bjrr.pacman.behaviourtree.BehaviourTreePacManController;
+import bjrr.pacman.ga.GeneticAlgorithmPacManController;
+import bjrr.pacman.ga.PacManGeneForBehaviourTree;
 import pacman.controllers.Controller;
 import pacman.controllers.HumanController;
 import pacman.controllers.KeyBoardInput;
@@ -75,18 +74,18 @@ public class Executor
 		// behaviour tree:
 //		exec.runGameTimed(new BehaviourTreePacManController(), new StarterGhosts(), visual);
 		PacManGeneForBehaviourTree gene = new PacManGeneForBehaviourTree();
-		gene.setMinGhostDistance(14);
-		gene.setMaxPowerPillDistance(1);
-		gene.setPowerPillWalkAwayDistance(67);
-//		exec.runGameTimed(
+		gene.setMinGhostDistance(5);
+		gene.setMaxPowerPillDistance(15);
+		gene.setPowerPillWalkAwayDistance(60);
+		exec.runGameTimed(
+				new bjrr.pacman.ga.GeneticAlgorithmPacManController(), 
+				new StarterGhosts(), 
+				visual );
+//		float fitness = (float) exec.runExperimentReturnAverageScore(
 //				new GeneticAlgorithmPacManController(gene), 
 //				new StarterGhosts(), 
-//				visual );
-		float fitness = (float) exec.runExperimentReturnAverageScore(
-				new GeneticAlgorithmPacManController(gene), 
-				new StarterGhosts(), 
-				500 );
-		System.out.println( "Fitness: " + fitness );
+//				500 );
+//		System.out.println( "Fitness: " + fitness );
 		
 		
 		// Neural Network data collection
