@@ -14,7 +14,7 @@ public class FeedforwardBackpropagationPacmanTraining {
 	
 	public static double[] getTrainingInputFromData( DataTuple oneTuple ) {
 		double[] oneTrainingInput = new double[12];
-
+/*
 		oneTrainingInput[0] = oneTuple.normalizeLevel( oneTuple.currentLevel );
 		oneTrainingInput[1] = oneTuple.normalizePosition( oneTuple.pacmanPosition );
 		oneTrainingInput[2] = oneTuple.normalizeNumberOfPills( oneTuple.numOfPillsLeft );
@@ -45,9 +45,9 @@ public class FeedforwardBackpropagationPacmanTraining {
 		} else {
 			oneTrainingInput[11] = 1;
 		}
-/**
+*/
 		
-		The following inputs result in a much slower decrease in error rate:
+//		The following inputs result in a much slower decrease in error rate ?:
 		
 		// current level
 		oneTrainingInput[0] = oneTuple.normalizeLevel( oneTuple.currentLevel );
@@ -81,7 +81,7 @@ public class FeedforwardBackpropagationPacmanTraining {
 		
 		// number of power pills left
 		oneTrainingInput[11] = oneTuple.normalizeNumberOfPowerPills( oneTuple.numOfPowerPillsLeft );
-*/
+
 		
 		return oneTrainingInput;
 	}
@@ -151,13 +151,22 @@ public class FeedforwardBackpropagationPacmanTraining {
 		// input layer
 		network.addLayer( new Layer(pacmanTrainingInput[0].length) );
 		// hidden layer
-		int hiddenNeuronCountAsFractionOfInputCount = Math.round(
-				pacmanTrainingInput[0].length*((float)2/3));
-		final int hiddenNeuronCount = 
-				hiddenNeuronCountAsFractionOfInputCount + pacmanTrainingOutput[0].length;
+		/*
+		 * Rule of thumb:
+		 * The number of hidden neurons should be 2/3 the size of the input layer, 
+		 * plus the size of the output layer.
+		 */
+//		int hiddenNeuronCountAsFractionOfInputCount = Math.round(
+//				pacmanTrainingInput[0].length*((float)2/3));
+//		final int hiddenNeuronCount = 
+//				hiddenNeuronCountAsFractionOfInputCount + pacmanTrainingOutput[0].length;
 		
-		
-		// much worse: int hiddenNeuronCount = (int)Math.round( pacmanTrainingInput[0].length * 1.7 );
+		/*
+		 * Rule of thumb:
+		 * The number of hidden neurons should be less than twice the size of the input layer.
+		 * - much worse?
+		 */
+		final int hiddenNeuronCount = (int)Math.round( pacmanTrainingInput[0].length * 1.7 );
 		// also bad:
 //		int hiddenNeuronCount = Math.round( (
 //				pacmanTrainingInput[0].length + pacmanTrainingOutput[0].length) / 2 );
@@ -198,9 +207,9 @@ public class FeedforwardBackpropagationPacmanTraining {
 		 * how much of an effect the previous training iteration will have
 		 * on the current iteration.
 		 */
-		double learningRateDivisor = 1;
-		double learningRate = 1 / learningRateDivisor;
-//		double learningRate = 0.1;
+//		double learningRateDivisor = 1;
+//		double learningRate = 1 / learningRateDivisor;
+		double learningRate = 0.1;
 //		double learningRate = 1;
 		Backpropagation train = new Backpropagation(
 				network, pacmanTrainingInput, pacmanTrainingOutput, learningRate );
@@ -213,9 +222,9 @@ public class FeedforwardBackpropagationPacmanTraining {
 		 */
 		do {
 			if( epoch % 100 == 0 ) {
-				learningRateDivisor++;
-				learningRate = 1 / learningRateDivisor;
-				train.setLearningRate( learningRate );
+//				learningRateDivisor++;
+//				learningRate = 1 / learningRateDivisor;
+//				train.setLearningRate( learningRate );
 				System.out.println( "Epoch #" + epoch + 
 						" Error: " + train.getError() +
 						" Learning rate: " + learningRate );
@@ -227,7 +236,7 @@ public class FeedforwardBackpropagationPacmanTraining {
 			epoch++;
 			
 		} while( epoch < 1000000 && train.getError() > .001 );
-		
+			
 		
 		/**
 		 * Now after training is complete, we'll save the trained network to disk
