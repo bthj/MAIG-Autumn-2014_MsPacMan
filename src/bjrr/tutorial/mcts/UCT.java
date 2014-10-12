@@ -10,6 +10,7 @@ import java.util.Random;
  * @author D.Vitonis
  * @modified A. Hartzen
  *
+ * @modified Björn Þór Jónsson - bthj (AKA bjrr)
  */
 public class UCT {
 

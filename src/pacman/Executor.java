@@ -14,6 +14,7 @@ import bjrr.pacman.ann.dataRecording.DataCollectorController;
 import bjrr.pacman.behaviourtree.BehaviourTreePacManController;
 import bjrr.pacman.ga.GeneticAlgorithmPacManController;
 import bjrr.pacman.ga.PacManGeneForBehaviourTree;
+import bjrr.pacman.mcts.MCTSPacmanController;
 import pacman.controllers.Controller;
 import pacman.controllers.HumanController;
 import pacman.controllers.KeyBoardInput;
@@ -47,6 +48,16 @@ public class Executor
 	 */
 	public static void main(String[] args)
 	{
+		boolean mctsDefaultPolicy = true;
+		if( args.length > 0 ) {
+			// we assume those are arguments for the MCTS controller
+			if( args[0].equals("default") ) {
+				mctsDefaultPolicy = true;
+			} else {
+				mctsDefaultPolicy = false;
+			}
+		}
+		
 		Executor exec=new Executor();
 
 		/*
@@ -73,19 +84,40 @@ public class Executor
 		
 		// behaviour tree:
 //		exec.runGameTimed(new BehaviourTreePacManController(), new StarterGhosts(), visual);
+		
 		PacManGeneForBehaviourTree gene = new PacManGeneForBehaviourTree();
 		gene.setMinGhostDistance(5);
 		gene.setMaxPowerPillDistance(15);
 		gene.setPowerPillWalkAwayDistance(60);
-		exec.runGameTimed(
-				new bjrr.pacman.ga.GeneticAlgorithmPacManController(), 
-				new StarterGhosts(), 
-				visual );
+//		exec.runGameTimed(
+//				new bjrr.pacman.ga.GeneticAlgorithmPacManController(), 
+//				new StarterGhosts(), 
+//				visual );
 //		float fitness = (float) exec.runExperimentReturnAverageScore(
 //				new GeneticAlgorithmPacManController(gene), 
 //				new StarterGhosts(), 
 //				500 );
 //		System.out.println( "Fitness: " + fitness );
+		
+//		long startTime = System.currentTimeMillis();
+//		exec.runExperiment(new GeneticAlgorithmPacManController(gene) ,new StarterGhosts(), 1);
+//		System.out.println( "One experiment took " + 
+//				(System.currentTimeMillis() - startTime) + " milliseconds." );
+		
+		/*
+		 * MCTS - Monte Carlo Tree Search / UCT
+		 */
+//		exec.runGameTimed(new MCTSPacmanController(0), new StarterGhosts(), visual);
+		
+		for( int playoutIterationLimit = 0; playoutIterationLimit < 1000; playoutIterationLimit++ ) {
+			
+			float fitness = exec.runExperimentReturnAverageScore(
+					new MCTSPacmanController(playoutIterationLimit, mctsDefaultPolicy), 
+					new StarterGhosts(), 
+					1 );
+			System.out.println( "playoutIterationLimit: " + playoutIterationLimit + 
+					", average score: " + fitness );
+		}
 		
 		
 		// Neural Network data collection
@@ -135,13 +167,13 @@ public class Executor
      * @param trials The number of trials to be executed
      * @return The average score from the game runs.
      */
-    public double runExperimentReturnAverageScore(
+    public float runExperimentReturnAverageScore(
     		Controller<MOVE> pacManController,
     		Controller<EnumMap<GHOST,MOVE>> 
     		ghostController,
     		int trials) {
     	
-    	double avgScore=0;
+    	float avgScore=0;
     	
     	Random rnd=new Random(0);
 		Game game;

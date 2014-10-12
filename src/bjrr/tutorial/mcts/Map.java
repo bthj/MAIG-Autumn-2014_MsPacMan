@@ -6,6 +6,8 @@ package bjrr.tutorial.mcts;
  * @author A.Liapis
  * @modified D.Vitonis
  * @modified A. Hartzen
+ * 
+ * @modified Björn Þór Jónsson - bthj (AKA bjrr)
  */
 public class Map{
 	
