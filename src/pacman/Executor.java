@@ -110,13 +110,14 @@ public class Executor
 //		exec.runGameTimed(new MCTSPacmanController(0), new StarterGhosts(), visual);
 		
 		for( int playoutIterationLimit = 0; playoutIterationLimit < 1000; playoutIterationLimit++ ) {
-			
+			long startTime = System.currentTimeMillis();
 			float fitness = exec.runExperimentReturnAverageScore(
 					new MCTSPacmanController(playoutIterationLimit, mctsDefaultPolicy), 
 					new StarterGhosts(), 
 					1 );
 			System.out.println( "playoutIterationLimit: " + playoutIterationLimit + 
-					", average score: " + fitness );
+					", average score: " + fitness + 
+					", experiment time: " + (System.currentTimeMillis() - startTime ) );
 		}
 		
 		
