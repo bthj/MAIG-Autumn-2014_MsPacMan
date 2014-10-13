@@ -20,7 +20,12 @@ public class FeedforwardBackpropagationPacmancontroller extends Controller<MOVE>
 		lastMove = MOVE.NEUTRAL;
 		
 		String pacmanNeuralNeetworkFilename = 
-				"pacmanANN__hiddenNeuronCount_11.save";
+//				"pacmanANN__hiddenNeuronCount_20__learningRateFixedAt0dot1__hiddenNeuronsLessThanTwiceInputSize.save";
+//				"pacmanANN__hiddenNeuronCount_12__learningRateDownEvery100thEpoch.save";
+//				"pacmanANN__hiddenNeuronCount_12__learningRateFixedAt0dot1.save";
+//				"pacmanANN__hiddenNeuronCount_12__learningRateFixedAt0dot1__alternativeInputSet.save";
+//				"pacmanANN__hiddenNeuronCount_20__hiddenNeuronsLessThanTwiceInputSize__alternativeInputSet.save";
+				"pacmanANN__hiddenNeuronCount_20__learningRateFixedAt0dot1__hiddenNeuronsLessThanTwiceInputSize.save";
 		
 		try {
 			
@@ -45,6 +50,8 @@ public class FeedforwardBackpropagationPacmancontroller extends Controller<MOVE>
 		
 		MOVE move = getMoveFromNetworkOutput( networkOutput );
 		
+//		System.out.println( "Chosen move: " + move );
+		
 		lastMove = move;
 		
 		return move;
@@ -54,9 +61,11 @@ public class FeedforwardBackpropagationPacmancontroller extends Controller<MOVE>
 	private MOVE getMoveFromNetworkOutput( double[] output ) {
 		
 		int highestIndex = 0;
+		double highestOutputValue = - Double.MAX_VALUE;
 		for( int i=0; i < output.length; i++ ) {
-			
-			if( output[i] > highestIndex ) {
+//			System.out.println( "one output: " + output[i] );
+			if( output[i] > highestOutputValue ) {
+				highestOutputValue = output[i];
 				highestIndex = i;
 			}
 		}

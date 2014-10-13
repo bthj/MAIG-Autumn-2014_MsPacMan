@@ -1,0 +1,57 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{msPacManFramework}
+\BIBentryALTinterwordspacing
+Ms pac-man vs ghosts league framework. [Online]. Available:
+  \url{http://www.pacman-vs-ghosts.net/software}
+\BIBentrySTDinterwordspacing
+
+\bibitem{eiben2003introduction}
+A.~E. Eiben and J.~E. Smith, \emph{Introduction to evolutionary
+  computing}.\hskip 1em plus 0.5em minus 0.4em\relax springer, 2003.
+
+\bibitem{Han:2005:DMC:1076797}
+J.~Han, \emph{Data Mining: Concepts and Techniques}.\hskip 1em plus 0.5em minus
+  0.4em\relax San Francisco, CA, USA: Morgan Kaufmann Publishers Inc., 2005.
+
+\bibitem{heaton2008introduction}
+J.~Heaton, \emph{Introduction to neural networks with Java}.\hskip 1em plus
+  0.5em minus 0.4em\relax Heaton Research, Inc., 2008.
+
+\bibitem{traingdm}
+\BIBentryALTinterwordspacing
+Gradient descent with momentum backpropagation. [Online]. Available:
+  \url{http://www.mathworks.se/help/nnet/ref/traingdm.html}
+\BIBentrySTDinterwordspacing
+
+\bibitem{jeffheaton-bookcode}
+\BIBentryALTinterwordspacing
+Source code from jeff heaton's books. [Online]. Available:
+  \url{https://code.google.com/p/jeffheaton-bookcode/}
+\BIBentrySTDinterwordspacing
+
+\bibitem{pepels2012enhancements}
+T.~Pepels and M.~H. Winands, ``Enhancements for monte-carlo tree search in ms
+  pac-man,'' in \emph{Computational Intelligence and Games (CIG), 2012 IEEE
+  Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2012, pp.
+  265--272.
+
+\end{thebibliography}

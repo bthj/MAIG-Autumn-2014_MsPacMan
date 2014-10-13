@@ -55,6 +55,7 @@ public class FeedforwardBackpropagationPacmanTraining {
 		// pacman position
 		oneTrainingInput[1] = oneTuple.normalizePosition( oneTuple.pacmanPosition );
 		
+		
 		oneTrainingInput[2] = oneTuple.normalizeNumberOfPills( oneTuple.numOfPillsLeft );
 		oneTrainingInput[3] = oneTuple.normalizeNumberOfPowerPills( oneTuple.numOfPowerPillsLeft );
 		
